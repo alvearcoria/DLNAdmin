@@ -19,11 +19,31 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
+  NbInputModule,
+  NbFormFieldModule,
+  NbButtonModule,
+  NbIconModule,
+  NbAlertModule,
+  NbBadgeModule,
 } from '@nebular/theme';
 
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
+
+import { CommonModule } from '@angular/common';
+
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -39,7 +59,23 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+
+    ReactiveFormsModule,
+    FormsModule,
+    NbInputModule,
+    NbFormFieldModule,
+    NbIconModule,
+    NbButtonModule,
+    NbAlertModule,
+    NbBadgeModule,
   ],
+  providers: [
+    AuthService,
+    AuthGuard,
+   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

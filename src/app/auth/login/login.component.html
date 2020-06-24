@@ -1,0 +1,56 @@
+<div *ngIf="done">
+  <h1 id="title" class="title">Iniciar sesión</h1>
+  <p class="sub-title">¡Hola! Inicia sesión con tu correo electrónico.</p>
+
+  <form [formGroup]="loginForm" (ngSubmit)='login()'>
+    <div class="form-control-group">
+      <label class="label" for="input-email">Correo Electronico</label>
+      <input nbInput formControlName="email" fullWidth name="email" id="input-email" pattern=".+@.+\..+"
+        placeholder="Correo Electrónico" [ngClass]="{ 'is-invalid': emailError && f.email.errors }" fieldSize="large"
+        autofocus [status]="f.email.dirty ? (f.email.invalid  ? 'danger' : 'success') : 'basic'" spellcheck="false">
+      <ng-container *ngIf="emailError && f.email.errors" class="invalid-feedback">
+        <div class="caption status-danger" *ngIf="f.email.errors.required">Se requiere el correo electrónico</div>
+        <div class="caption status-danger" *ngIf="f.email.errors.email">El correo electrónico no es valido</div>
+      </ng-container>
+    </div>
+
+    <div class="form-control-group">
+      <span class="label-with-link">
+        <label class="label" for="input-password">Contraseña:</label>
+      </span>
+      <input nbInput formControlName="password" fullWidth type="password" placeholder="Contraseña"
+        [ngClass]="{ 'is-invalid': passError && f.password.errors }" fieldSize="large"
+        [status]="f.password.dirty ? (f.password.invalid  ? 'danger' : 'success') : 'basic'">
+      <ng-container *ngIf="passError && f.password.errors" class="invalid-feedback">
+        <div class="caption status-danger" *ngIf="f.password.errors.required">Se requiere la contraseña</div>
+        <div class="caption status-danger" *ngIf="f.password.errors.minlength">La contraseña debe de tener minimo 6
+          caracteres</div>
+      </ng-container>
+    </div>
+
+    <button nbButton fullWidth hero status="primary" shape="semi-round" size="large" [disabled]="!loginForm.valid"
+      [class.btn-pulse]="submitted">
+      Entrar
+    </button>
+    <br>
+  </form>
+
+  <div  *ngIf="errorMessage != ''">
+    <br>
+    <nb-badge text="{{errorMessage}}" status="danger" position=" relative center" ></nb-badge>
+  </div>
+
+  <p class="text-center sub-title mt-4">o puedes acceder con tu cuenta de:</p>
+  <div class="align-content-center">
+    <div class="form-group text-center">
+      <button nbButton class=" text-center mr-3" status="primary" shape="semi-round">
+        <nb-icon icon="facebook-outline"></nb-icon>FACEBOOK
+      </button>
+      <button nbButton class=" text-center" status="danger" shape="semi-round">
+        <nb-icon icon="google-outline"></nb-icon>GOOGLE
+      </button>
+    </div>
+  </div>
+
+
+</div>
