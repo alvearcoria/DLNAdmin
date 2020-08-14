@@ -1,0 +1,114 @@
+<div *ngIf="!done" style="height: 900px;">
+  <nb-card [nbSpinner]="true" nbSpinnerStatus="primary" style="height: 100%;">
+    <nb-card-body>
+
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <a href="{{urltemplate}}" nbButton shape="semi-round" hero size="medium" outline status="info">Descargar Template
+      {{routeData}}</a>
+  </div>
+</div>
+
+<br>
+
+<tabset [justified]="true">
+  <tab>
+      <ng-template tabHeading>{{routeData}}</ng-template>
+      <div>
+          <fieldset>
+              <form class="panel" [formGroup]="rForm">
+                  <div class="form-group">
+                      <label class="col-md control-label">Seleccionar Archivo:</label>
+                      <div class="">
+                          <input type="file" nbInput (change)="handleFile($event)" accept=".xlsx" formControlName="archivo" fullWidth />
+                      </div>
+                  </div>
+              </form>
+          </fieldset>
+      </div>
+  </tab>
+</tabset>
+
+
+<div class="row">
+  <div class="col-lg-12">
+      <nb-card *ngIf="bandProspRam">
+          <nb-card-header style=" background-color: #34495E;">
+              <div class="col-md text-center">
+                  <h5 class="d-block " style="color:#fff; "> {{routeData}} precargados </h5>
+              </div>
+          </nb-card-header>
+          <nb-card-body>
+            <div id="tablesCenter" *ngIf="bandProspRam">
+              <div id="mainTable">
+                  <ag-grid-angular #agGrid2
+                    class="ag-theme-balham"
+                    style="width: 100%; height: 500px;"
+                    [gridOptions]="firstTable"
+                    (cellClicked)="onCellClicked($event)"
+                    (gridReady)="gridReady($event)">
+                  </ag-grid-angular>
+              </div>
+            </div>
+            <div id="secondaryTable" *ngIf="prospecto!=null">
+              <div id="contentArea">
+                  <div class="alert alert-info" role="alert">
+                      <h4 class="alert-heading">Datos en el sistema</h4>
+                      <div><strong>Nombre:</strong> {{ prospecto.nombres }}</div>
+                      <div><strong>Apellido Paterno:</strong> {{ prospecto.apellido_1 }}</div>
+                      <div><strong>Apellido materno:</strong> {{ prospecto.apellido_2 }}</div>
+                      <div><strong>No de Control:</strong> {{ prospecto.noControl }}</div>
+                      <div><strong>Fecha nacimiento:</strong> {{ prospecto.f_nacimiento }}</div>
+                      <div><strong>Estatus:</strong> {{ prospecto.estatus }}</div>
+                  </div>
+              </div>
+              <div id="contentArea">
+                  <div class="alert alert-warning" role="alert">
+                      <h4 class="alert-heading">Nuevos datos</h4>
+                      <div><strong>Nombre:</strong> {{ prospecto2.nombres }}</div>
+                      <div><strong>Apellido Paterno:</strong> {{ prospecto2.apellido_1 }}</div>
+                      <div><strong>Apellido materno:</strong> {{ prospecto2.apellido_2 }}</div>
+                      <div><strong>No de Control:</strong> {{ prospecto2.noControl }}</div>
+                      <div><strong>Fecha nacimiento:</strong> {{ prospecto2.f_nacimiento_aaaa_mm_dd }}</div>
+                      <div><strong>Estatus:</strong> {{ prospecto2.estatus }}</div>
+                  </div>
+              </div>
+            </div>
+          </nb-card-body>
+          <nb-card-footer>
+            <small *ngIf="prospectosRam && prospectosRam.length>0">
+              <div class="alert alert-secondary" role="alert" *ngIf="prospectosRam && prospectosRam.length>0">
+                  <span> <b>Nuevos: </b> {{ nuevos }} | <b>Duplicados: </b> {{ duplicados }}</span>
+              </div>
+              <button type="button" class='btn btn-info' [disabled]=rForm.invalid (click)="guargarProspectos()">
+                  <span>Agregar {{ prospectosRam.length }} prospecto(s)</span>
+              </button>
+            </small>
+            <small *ngIf="prospectosRam && prospectosRam.length>0">
+              <button type="button" class='btn btn-danger' (click)="reiniciarComponente()">
+                  <span>Cancelar</span>
+              </button>
+            </small>
+
+          </nb-card-footer>
+      </nb-card>
+  </div>
+</div>
+
+<ng-template #modalLoadData>
+  <div class="modal-header">
+      <h4 class="modal-title pull-left"> Cargando {{routeData}} </h4>
+  </div>
+
+  <div class="modal-body">
+      <div class="mb-2">
+          <progressbar class="progress-striped active" [value]="prospLoad" [max]="prospectosRam.length" type="danger">
+              <i>{{ prospLoad }} / {{ prospectosRam.length }}</i></progressbar>
+      </div>
+  </div>
+
+</ng-template>

@@ -13,6 +13,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/iot-dashboard',
   },
   {
+    title: 'Cargar Tutores',
+    icon: 'upload-outline',
+    link: '/pages/upload-data',
+    queryParams: { data: 'tutores' }
+  },
+  {
+    title: 'Cargar Alumnos',
+    icon: 'upload-outline',
+    link: '/pages/upload-data',
+    queryParams: { data: 'alumnos' }
+  },
+  {
     title: 'Miscellaneous',
     icon: 'shuffle-2-outline',
     children: [

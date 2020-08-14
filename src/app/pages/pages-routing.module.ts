@@ -8,11 +8,18 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { LogoutComponent } from './../auth/logout/logout.component';
 import { AuthGuard } from './../auth/auth.guard';
 
+import { UploadDataComponent } from './upload-data/upload-data.component'
+
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path: 'upload-data',
+      component: UploadDataComponent,
+
+    },
     {
       path: 'dashboard',
       component: ECommerceComponent,

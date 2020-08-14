@@ -8,6 +8,8 @@ import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { LogoutComponent } from './../auth/logout/logout.component';
+import { UploadDataModule } from './upload-data/upload-data.module';
+//import { UploadalumnosModule } from './uploadalumnos/uploadalumnos.module';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { LogoutComponent } from './../auth/logout/logout.component';
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
+    UploadDataModule,
+    //UploadalumnosModule,
   ],
   declarations: [
     PagesComponent,

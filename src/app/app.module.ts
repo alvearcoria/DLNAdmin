@@ -38,6 +38,11 @@ import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
 
 import { CommonModule } from '@angular/common';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+
 
 
 @NgModule({
@@ -71,6 +76,11 @@ import { CommonModule } from '@angular/common';
     NbButtonModule,
     NbAlertModule,
     NbBadgeModule,
+    TypeaheadModule.forRoot(),
+    ModalModule.forRoot(),
+    TooltipModule.forRoot(),
+    ProgressbarModule.forRoot(),
+
   ],
   providers: [
     AuthService,
