@@ -8,7 +8,8 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { LogoutComponent } from './../auth/logout/logout.component';
 import { AuthGuard } from './../auth/auth.guard';
 
-import { UploadDataComponent } from './upload-data/upload-data.component'
+import { UploadDataComponent } from './upload-data/upload-data.component';
+import { AddTutoresComponent } from './add-tutores/add-tutores.component';
 
 
 const routes: Routes = [{
@@ -19,6 +20,10 @@ const routes: Routes = [{
       path: 'upload-data',
       component: UploadDataComponent,
 
+    },
+    {
+      path: 'add-tutores',
+      component: AddTutoresComponent,
     },
     {
       path: 'dashboard',

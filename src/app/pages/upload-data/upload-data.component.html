@@ -1,6 +1,243 @@
 <div *ngIf="!done" style="height: 900px;">
   <nb-card [nbSpinner]="true" nbSpinnerStatus="primary" style="height: 100%;">
     <nb-card-body>
+    </nb-card-body>
+  </nb-card>
+</div>
+<nb-card>
+  <nb-card-body>
+    <nb-tabset fullWidth>
+      <nb-tab tabIcon="person-outline" tabTitle="Registro Individual">
+        <div class=" form-group col-lg text-center">
+          <h4 class=" d-block">Registrar nuevo ALUMNO
+          </h4>
+        </div>
+        <form class="panel is-valid " [formGroup]="alumnoForm" (ngSubmit)="savealumno()" autocomplete="off">
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Numero de control</label>
+                <input type="text" formControlName="alu_NControl" minlength="8" maxlength="15" class="form-control" placeholder="Numero de control" (keyup)="onKeydown($event)" [ngClass]="{ 'is-invalid': f.alu_NControl.invalid && (f.alu_NControl.dirty || f.alu_NControl.touched) }" />
+                <div *ngIf="f.alu_NControl.invalid && (f.alu_NControl.dirty || f.alu_NControl.touched)" class="invalid-feedback">
+                    <div *ngIf="f.alu_NControl.errors.required">CAMPO REQUERIDO!</div>
+                    <div *ngIf="f.alu_NControl.errors.pattern">FORMATO NO VALIDO</div>
+                </div>
+            </div>
+        </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Nombre(s)</label>
+              <input type="text" formControlName="alu_nombres" (keyup)="onKeydown($event)" class="form-control"
+                placeholder="Nombre(s)"
+                [ngClass]="{ 'is-invalid': f.alu_nombres.invalid && (f.alu_nombres.dirty || f.alu_nombres.touched) }" />
+              <div *ngIf="f.alu_nombres.invalid && (f.alu_nombres.dirty || f.alu_nombres.touched)"
+                class="invalid-feedback">
+                <div *ngIf="f.alu_nombres.errors.required">CAMPO REQUERIDO!</div>
+                <div *ngIf="f.alu_nombres.errors.pattern">FORMATO INVALIDO!</div>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Apellido Paterno</label>
+              <input type="text" class="form-control" (keyup)="onKeydown($event)" formControlName="alu_apPaterno"
+                placeholder="Apellido Paterno"
+                [ngClass]="{ 'is-invalid': f.alu_apPaterno.invalid && (f.alu_apPaterno.dirty || f.alu_apPaterno.touched) }" />
+              <div *ngIf="f.alu_apPaterno.invalid && (f.alu_apPaterno.dirty || f.alu_apPaterno.touched)"
+                class="invalid-feedback">
+                <div *ngIf="f.alu_apPaterno.errors.required">CAMPO REQUERIDO!</div>
+                <div *ngIf="f.alu_apPaterno.errors.pattern">formato invalido!</div>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Apellido Materno</label>
+              <input type="text" class="form-control" (keyup)="onKeydown($event)" formControlName="alu_apMaterno"
+                placeholder="Apellido Materno"
+                [ngClass]="{ 'is-invalid': f.alu_apMaterno.invalid && (f.alu_apMaterno.dirty || f.alu_apMaterno.touched) }" />
+              <div *ngIf="f.alu_apMaterno.invalid && (f.alu_apMaterno.dirty || f.alu_apMaterno.touched)"
+                class="invalid-feedback">
+                <div *ngIf="f.alu_apMaterno.errors.required">CAMPO REQUERIDO!</div>
+                <div *ngIf="f.alu_apMaterno.errors.pattern">FORMATO INVALIDO!</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="inputFN">Fecha de Nacimiento</label>
+              <input nbInput placeholder="DD/MM/AAAA" class="form-control" [nbDatepicker]="formpicker"
+                formControlName="alu_fNacimiento"
+                [ngClass]="{ 'is-invalid': f.alu_fNacimiento.invalid && (f.alu_fNacimiento.dirty || f.alu_fNacimiento.touched) }" />
+              <nb-datepicker #formpicker></nb-datepicker>
+              <div *ngIf="f.alu_fNacimiento.invalid && (f.alu_fNacimiento.dirty || f.alu_fNacimiento.touched)"
+                class="invalid-feedback">
+                <div *ngIf="f.alu_fNacimiento.errors.required">CAMPO REQUERIDO!</div>
+              </div>
+            </div>
+            <!--
+  O negativo. Este tipo de sangre no tiene marcadores A ni B y tampoco presenta el factor Rh.
+O positivo. Este tipo de sangre no tiene marcadores A ni B pero sí que presenta el factor Rh. Se trata de uno de los dos tipos de sangre más frecuentes (junto al A positivo).
+A negativo. Este tipo de sangre solo tiene el marcador A.
+A positivo. Este tipo de sangre tiene el marcador A y el factor Rh, pero carece del marcador B. Junto con el O positivo, se trata de uno de los dos tipos de sangre más frecuentes.
+B negativo. Este tipo de sangre solo tiene el marcador B.
+B positivo. Este tipo de sangre tiene el marcador B y el factor Rh, pero carece del marcador A.
+AB negativo. Este tipo de sangre tiene los marcadores A y B, pero carece del factor Rh.
+AB positivo. Este tipo de sangre tiene los tres marcadores: A, B y factor Rh.
+ -->
+
+ <div class="form-group col-md-3 text-center align-content-center">
+  <div class="">
+      <label for="inputG"> Genero/Sexo </label>
+  </div>
+  <div class="form-row">
+      <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" class="custom-control-input" id="radioMale" formControlName="alu_sexo" value="Masculino">
+          <label class="custom-control-label" for="radioMale"><span class="fa fa-male"></span></label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" class="custom-control-input" id="radiofemale" formControlName="alu_sexo" value="Femenino">
+          <label class="custom-control-label" for="radiofemale"><span class="fa fa-female"></span></label>
+      </div>
+  </div>
+</div>
+
+            <div class="form-group col-md-4">
+              <label for="inputState">Tipo de sangre</label>
+              <select id="inputState" formControlName="alu_tipo_sangre" class="form-control"
+                [ngClass]="{ 'is-invalid': f.alu_tipo_sangre.invalid && (f.alu_tipo_sangre.dirty || f.alu_tipo_sangre.touched) }">
+                <option selected value="">Elige un tipo de sangre...</option>
+                <option value="O-">O negativo</option>
+                <option value="O+">O positivo</option>
+                <option value="A-">A negativo</option>
+                <option value="A+">A positivo</option>
+                <option value="B-">B negativo</option>
+                <option value="B+">B positivo</option>
+                <option value="AB-">AB negativo</option>
+                <option value="AB+">AB positivo</option>
+              </select>
+              <div *ngIf="f.alu_tipo_sangre.invalid && (f.alu_tipo_sangre.dirty || f.alu_tipo_sangre.touched)"
+                class="invalid-feedback">
+                <div *ngIf="f.alu_tipo_sangre.errors.required">CAMPO REQUERIDO!</div>
+              </div>
+            </div>
+
+            <div class="form-row align-center justify-content-center ">
+              <button type="submit" nbButton shape="semi-round" size="large" status="primary" hero
+                [disabled]="!alumnoForm.valid">
+                <nb-icon icon="save"></nb-icon> Guardar
+              </button>
+            </div>
+          </div>
+        </form>
+      </nb-tab>
+      <nb-tab tabIcon="bell-outline" tabTitle="Registro en masa...">
+        <div class="row">
+          <div class="col-lg-12">
+            <a href="{{urltemplate}}" nbButton shape="semi-round" hero size="medium" outline status="info">Descargar
+              Template
+              Alumnos</a>
+          </div>
+        </div>
+        <br>
+        <tabset [justified]="true">
+          <tab>
+            <ng-template tabHeading>CARGAR Alumnos</ng-template>
+            <div>
+              <fieldset>
+                <form class="panel" [formGroup]="rForm">
+                  <div class="form-group">
+                    <label class="col-md control-label">Seleccionar Archivo:</label>
+                    <div class="">
+                      <input type="file" nbInput (change)="handleFile($event)" accept=".xlsx" formControlName="archivo"
+                        fullWidth />
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </tab>
+        </tabset>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <nb-card *ngIf="bandProspRam">
+              <nb-card-header style=" background-color: #34495E;">
+                <div class="col-md text-center">
+                  <h5 class="d-block " style="color:#fff; "> {{routeData}} precargados </h5>
+                </div>
+              </nb-card-header>
+              <nb-card-body>
+                <div id="tablesCenter" *ngIf="bandProspRam">
+                  <div id="mainTable">
+                    <ag-grid-angular #agGrid2 class="ag-theme-balham" style="width: 100%; height: 500px;"
+                      [gridOptions]="firstTable" (cellClicked)="onCellClicked($event)" (gridReady)="gridReady($event)">
+                    </ag-grid-angular>
+                  </div>
+                </div>
+                <div id="secondaryTable" *ngIf="prospecto!=null">
+                  <div id="contentArea">
+                    <div class="alert alert-info" role="alert">
+                      <h4 class="alert-heading">Datos en el sistema</h4>
+                      <div><strong>Nombre:</strong> {{ prospecto.nombres }}</div>
+                      <div><strong>Apellido Paterno:</strong> {{ prospecto.apellido_1 }}</div>
+                      <div><strong>Apellido materno:</strong> {{ prospecto.apellido_2 }}</div>
+                      <div><strong>Telefono:</strong> {{ prospecto.noControl }}</div>
+                    </div>
+                  </div>
+                  <div id="contentArea">
+                    <div class="alert alert-warning" role="alert">
+                      <h4 class="alert-heading">Nuevos datos</h4>
+                      <div><strong>Nombre:</strong> {{ prospecto2.nombres }}</div>
+                      <div><strong>Apellido Paterno:</strong> {{ prospecto2.apellido_1 }}</div>
+                      <div><strong>Apellido materno:</strong> {{ prospecto2.apellido_2 }}</div>
+                      <div><strong>Telefono:</strong> {{ prospecto2.noControl }}</div>
+                    </div>
+                  </div>
+                </div>
+              </nb-card-body>
+              <nb-card-footer>
+                <small *ngIf="prospectosRam && prospectosRam.length>0">
+                  <div class="alert alert-secondary" role="alert" *ngIf="prospectosRam && prospectosRam.length>0">
+                    <span> <b>Nuevos: </b> {{ nuevos }} | <b>Duplicados: </b> {{ duplicados }}</span>
+                  </div>
+                  <button type="button" class='btn btn-info' [disabled]=rForm.invalid (click)="guargarProspectos()">
+                    <span>Agregar {{ prospectosRam.length }} prospecto(s)</span>
+                  </button>
+                </small>
+                <small *ngIf="prospectosRam && prospectosRam.length>0">
+                  <button type="button" class='btn btn-danger' (click)="reiniciarComponente()">
+                    <span>Cancelar</span>
+                  </button>
+                </small>
+              </nb-card-footer>
+            </nb-card>
+          </div>
+        </div>
+      </nb-tab>
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>
+
+<ng-template #modalLoadData>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> Cargando {{routeData}} </h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="mb-2">
+      <progressbar class="progress-striped active" [value]="prospLoad" [max]="prospectosRam.length" type="danger">
+        <i>{{ prospLoad }} / {{ prospectosRam.length }}</i></progressbar>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+
+<!--
+
+  <div *ngIf="!done" style="height: 900px;">
+  <nb-card [nbSpinner]="true" nbSpinnerStatus="primary" style="height: 100%;">
+    <nb-card-body>
 
     </nb-card-body>
   </nb-card>
@@ -112,3 +349,5 @@
   </div>
 
 </ng-template>
+
+-->

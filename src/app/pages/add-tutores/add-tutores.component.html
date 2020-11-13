@@ -1,0 +1,212 @@
+<div *ngIf="!done" style="height: 900px;">
+  <nb-card [nbSpinner]="true" nbSpinnerStatus="primary" style="height: 100%;">
+    <nb-card-body>
+    </nb-card-body>
+  </nb-card>
+</div>
+<nb-card>
+  <nb-card-body>
+    <nb-tabset fullWidth>
+      <nb-tab tabIcon="person-outline" tabTitle="Registro Individual">
+        <div class=" form-group col-lg text-center">
+          <h4 class=" d-block">Registrar nuevo Tutor/Padre
+          </h4>
+        </div>
+        <form class="panel is-valid " [formGroup]="tutorForm" (ngSubmit)="guardarPaciente()" autocomplete="off">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Nombre(s)</label>
+              <input type="text" formControlName="pac_nombres" (keyup)="onKeydown($event)" class="form-control"
+                placeholder="Nombre(s)"
+                [ngClass]="{ 'is-invalid': f.pac_nombres.invalid && (f.pac_nombres.dirty || f.pac_nombres.touched) }" />
+              <div *ngIf="f.pac_nombres.invalid && (f.pac_nombres.dirty || f.pac_nombres.touched)"
+                class="invalid-feedback">
+                <div *ngIf="f.pac_nombres.errors.required">CAMPO REQUERIDO!</div>
+                <div *ngIf="f.pac_nombres.errors.pattern">FORMATO INVALIDO!</div>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Apellido Paterno</label>
+              <input type="text" class="form-control" (keyup)="onKeydown($event)" formControlName="pac_apPaterno"
+                placeholder="Apellido Paterno"
+                [ngClass]="{ 'is-invalid': f.pac_apPaterno.invalid && (f.pac_apPaterno.dirty || f.pac_apPaterno.touched) }" />
+              <div *ngIf="f.pac_apPaterno.invalid && (f.pac_apPaterno.dirty || f.pac_apPaterno.touched)"
+                class="invalid-feedback">
+                <div *ngIf="f.pac_apPaterno.errors.required">CAMPO REQUERIDO!</div>
+                <div *ngIf="f.pac_apPaterno.errors.pattern">formato invalido!</div>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Apellido Materno</label>
+              <input type="text" class="form-control" (keyup)="onKeydown($event)" formControlName="pac_apMaterno"
+                placeholder="Apellido Materno"
+                [ngClass]="{ 'is-invalid': f.pac_apMaterno.invalid && (f.pac_apMaterno.dirty || f.pac_apMaterno.touched) }" />
+              <div *ngIf="f.pac_apMaterno.invalid && (f.pac_apMaterno.dirty || f.pac_apMaterno.touched)"
+                class="invalid-feedback">
+                <div *ngIf="f.pac_apMaterno.errors.required">CAMPO REQUERIDO!</div>
+                <div *ngIf="f.pac_apMaterno.errors.pattern">FORMATO INVALIDO!</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="inputFN">Fecha de Nacimiento</label>
+              <input nbInput placeholder="DD/MM/AAAA" class="form-control" [nbDatepicker]="formpicker"
+                formControlName="pac_fNacimiento"
+                [ngClass]="{ 'is-invalid': f.pac_fNacimiento.invalid && (f.pac_fNacimiento.dirty || f.pac_fNacimiento.touched) }" />
+              <nb-datepicker #formpicker></nb-datepicker>
+              <div *ngIf="f.pac_fNacimiento.invalid && (f.pac_fNacimiento.dirty || f.pac_fNacimiento.touched)"
+                class="invalid-feedback">
+                <div *ngIf="f.pac_fNacimiento.errors.required">CAMPO REQUERIDO!</div>
+              </div>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Email</label>
+              <input type="text" placeholder="ejemplo@dominio.com" formControlName="pac_email" class="form-control"
+                [ngClass]="{ 'is-invalid': f.pac_email.invalid && (f.pac_email.dirty || f.pac_email.touched) }" />
+              <div *ngIf="f.pac_email.invalid && (f.pac_email.dirty || f.pac_email.touched)" class="invalid-feedback">
+                <div *ngIf="f.pac_email.errors.required">CAMPO REQUERIDO!</div>
+                <div *ngIf="f.pac_email.errors.pattern">FORMATO DE CORREO INVALIDO</div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label>Teléfono</label>
+              <input type="text" placeholder="(000)-000-0000" formControlName="pac_tel" maxlength="10"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f.pac_tel.invalid && (f.pac_tel.dirty || f.pac_tel.touched) }" />
+              <div *ngIf="f.pac_tel.invalid && (f.pac_tel.dirty || f.pac_tel.touched)" class="invalid-feedback">
+                <div *ngIf="f.pac_tel.errors.required">CAMPO REQUERIDO!</div>
+                <div *ngIf="f.pac_tel.errors.pattern">FORMATO NO VALIDO</div>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label>Contraseña</label>
+              <input type="password" placeholder="" formControlName="pac_password" minlength="6"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f.pac_password.invalid && (f.pac_password.dirty || f.pac_password.touched) }" />
+              <div *ngIf="f.pac_password.invalid && (f.pac_password.dirty || f.pac_password.touched)" class="invalid-feedback">
+                <div *ngIf="f.pac_password.errors.required">CAMPO REQUERIDO!</div>
+                <div *ngIf="f.pac_password.errors.minlength">Debe tener un minimo 6 caracteres</div>
+
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Confirmar contraseña</label>
+              <input type="password" placeholder="" formControlName="pac_password_confirm" minlength="6"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f.pac_password_confirm.invalid && (f.pac_password_confirm.dirty || f.pac_password_confirm.touched) }" />
+              <div *ngIf="f.pac_password_confirm.invalid && (f.pac_password_confirm.dirty || f.pac_password_confirm.touched)" class="invalid-feedback">
+                <div *ngIf="f.pac_password_confirm.errors.required">CAMPO REQUERIDO!</div>
+                <div *ngIf="f.pac_password_confirm.errors.minlength">Debe tener un minimo 6 caracteres</div>
+                <div *ngIf="">No conciden las contraseñas</div>
+              </div>
+            </div>
+
+            <div class="form-row align-center justify-content-center ">
+              <button type="submit" nbButton shape="semi-round" size="large" status="primary" hero [disabled]="!tutorForm.valid"><nb-icon icon="save" ></nb-icon> Guardar </button>
+          </div>
+          </div>
+        </form>
+      </nb-tab>
+      <nb-tab tabIcon="bell-outline" tabTitle="Registro en masa...">
+        <div class="row">
+          <div class="col-lg-12">
+            <a href="{{urltemplate}}" nbButton shape="semi-round" hero size="medium" outline status="info">Descargar
+              Template
+              Tutores</a>
+          </div>
+        </div>
+        <br>
+        <tabset [justified]="true">
+          <tab>
+            <ng-template tabHeading>CARGAR TUTORES</ng-template>
+            <div>
+              <fieldset>
+                <form class="panel" [formGroup]="rForm">
+                  <div class="form-group">
+                    <label class="col-md control-label">Seleccionar Archivo:</label>
+                    <div class="">
+                      <input type="file" nbInput (change)="handleFile($event)" accept=".xlsx" formControlName="archivo"
+                        fullWidth />
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </tab>
+        </tabset>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <nb-card *ngIf="bandProspRam">
+              <nb-card-header style=" background-color: #34495E;">
+                <div class="col-md text-center">
+                  <h5 class="d-block " style="color:#fff; "> {{routeData}} precargados </h5>
+                </div>
+              </nb-card-header>
+              <nb-card-body>
+                <div id="tablesCenter" *ngIf="bandProspRam">
+                  <div id="mainTable">
+                    <ag-grid-angular #agGrid2 class="ag-theme-balham" style="width: 100%; height: 500px;"
+                      [gridOptions]="firstTable" (cellClicked)="onCellClicked($event)" (gridReady)="gridReady($event)">
+                    </ag-grid-angular>
+                  </div>
+                </div>
+                <div id="secondaryTable" *ngIf="prospecto!=null">
+                  <div id="contentArea">
+                    <div class="alert alert-info" role="alert">
+                      <h4 class="alert-heading">Datos en el sistema</h4>
+                      <div><strong>Nombre:</strong> {{ prospecto.nombres }}</div>
+                      <div><strong>Apellido Paterno:</strong> {{ prospecto.apellido_1 }}</div>
+                      <div><strong>Apellido materno:</strong> {{ prospecto.apellido_2 }}</div>
+                      <div><strong>Telefono:</strong> {{ prospecto.noControl }}</div>
+                    </div>
+                  </div>
+                  <div id="contentArea">
+                    <div class="alert alert-warning" role="alert">
+                      <h4 class="alert-heading">Nuevos datos</h4>
+                      <div><strong>Nombre:</strong> {{ prospecto2.nombres }}</div>
+                      <div><strong>Apellido Paterno:</strong> {{ prospecto2.apellido_1 }}</div>
+                      <div><strong>Apellido materno:</strong> {{ prospecto2.apellido_2 }}</div>
+                      <div><strong>Telefono:</strong> {{ prospecto2.noControl }}</div>
+                    </div>
+                  </div>
+                </div>
+              </nb-card-body>
+              <nb-card-footer>
+                <small *ngIf="prospectosRam && prospectosRam.length>0">
+                  <div class="alert alert-secondary" role="alert" *ngIf="prospectosRam && prospectosRam.length>0">
+                    <span> <b>Nuevos: </b> {{ nuevos }} | <b>Duplicados: </b> {{ duplicados }}</span>
+                  </div>
+                  <button type="button" class='btn btn-info' [disabled]=rForm.invalid (click)="guargarProspectos()">
+                    <span>Agregar {{ prospectosRam.length }} prospecto(s)</span>
+                  </button>
+                </small>
+                <small *ngIf="prospectosRam && prospectosRam.length>0">
+                  <button type="button" class='btn btn-danger' (click)="reiniciarComponente()">
+                    <span>Cancelar</span>
+                  </button>
+                </small>
+              </nb-card-footer>
+            </nb-card>
+          </div>
+        </div>
+      </nb-tab>
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>
+
+<ng-template #modalLoadData>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> Cargando {{routeData}} </h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="mb-2">
+      <progressbar class="progress-striped active" [value]="prospLoad" [max]="prospectosRam.length" type="danger">
+        <i>{{ prospLoad }} / {{ prospectosRam.length }}</i></progressbar>
+    </div>
+  </div>
+</ng-template>

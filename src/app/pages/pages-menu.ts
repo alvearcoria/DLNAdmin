@@ -15,7 +15,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Cargar Tutores',
     icon: 'upload-outline',
-    link: '/pages/upload-data',
+    link: '/pages/add-tutores',
     queryParams: { data: 'tutores' }
   },
   {

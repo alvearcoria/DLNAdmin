@@ -9,6 +9,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { LogoutComponent } from './../auth/logout/logout.component';
 import { UploadDataModule } from './upload-data/upload-data.module';
+import { AddTutoresModule } from './add-tutores/add-tutores.module';
 //import { UploadalumnosModule } from './uploadalumnos/uploadalumnos.module';
 
 
@@ -21,6 +22,7 @@ import { UploadDataModule } from './upload-data/upload-data.module';
     ECommerceModule,
     MiscellaneousModule,
     UploadDataModule,
+    AddTutoresModule,
     //UploadalumnosModule,
   ],
   declarations: [
