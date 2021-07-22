@@ -83,7 +83,7 @@
     "tslib": "^1.13.0",
     "typeface-exo": "0.0.22",
     "web-animations-js": "^2.3.2",
-    "xlsx": "^0.16.2",
+    "xlsx": "^0.17.0",
     "zone.js": "^0.10.3"
   },
   "devDependencies": {
